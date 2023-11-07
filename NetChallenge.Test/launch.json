@@ -1,0 +1,12 @@
+{
+    "configurations": [
+      {
+        "name": "Debug Tests",
+        "type": "coreclr",
+        "request": "launch",
+        "program": "${workspaceRoot}/bin/Debug/net7.0/NetChallenge.Test.dll",
+        "console": "integratedTerminal",
+        "args": ["--test-adapter", "xunit.runner.dotnet"]
+      }
+    ]
+  }
