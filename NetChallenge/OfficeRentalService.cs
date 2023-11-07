@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using NetChallenge.Abstractions;
+using NetChallenge.Domain;
 using NetChallenge.Dto.Input;
 using NetChallenge.Dto.Output;
 
@@ -21,7 +22,11 @@ namespace NetChallenge
 
         public void AddLocation(AddLocationRequest request)
         {
-            throw new NotImplementedException();
+            Location location = new Location();
+            location.Neighborhood = request.Neighborhood;
+            location.Name = request.Name;
+
+            _locationRepository.Add(location);
         }
 
         public void AddOffice(AddOfficeRequest request)
