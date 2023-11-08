@@ -22,7 +22,6 @@ namespace NetChallenge.Infrastructure
         public void Add(Location item)
         {
             context.Locations.Add(item);
-            context.SaveChanges();
         }
     }
 }
