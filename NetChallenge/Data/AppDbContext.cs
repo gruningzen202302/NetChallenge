@@ -9,5 +9,6 @@ namespace NetChallenge.Data{
         }
         protected override void OnConfiguring(DbContextOptionsBuilder options)=>options.UseSqlite();
         public DbSet<Location> Locations => Set<Location>();
+        public DbSet<Office> Offices =>Set<Office>();
     }
 }
