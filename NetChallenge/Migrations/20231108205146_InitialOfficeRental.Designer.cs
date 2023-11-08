@@ -10,8 +10,8 @@ using NetChallenge.Data;
 namespace NetChallenge.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231108201508_Initial")]
-    partial class InitialMigration
+    [Migration("20231108205146_InitialOfficeRental")]
+    partial class InitialOfficeRental
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -7,7 +7,7 @@
     },
     "AllowedHosts": "*",
   "ConnectionStrings": {
-    "DefaultConnection": "Data Source=OfficeBooking.sqlite"
+    "DefaultConnection": "Data Source=OfficeRental.sqlite"
   }
   }
   

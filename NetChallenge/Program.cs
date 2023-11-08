@@ -27,7 +27,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 string GetDatabasePath()
 {
     var databasePath = "";
-    var databaseName = "OfficeBooking.sqlite";
+    var databaseName = "OfficeRental.sqlite";
     return Path.Combine(databasePath,databaseName);
 
 }
