@@ -1,3 +1,4 @@
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,19 @@ builder.Services.AddSwaggerGen();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlite(connectionString));
+string GetDatabasePath()
+{
+    var databasePath = "";
+    var databaseName = "OfficeBooking.sqlite";
+    return Path.Combine(databasePath,databaseName);
+
+}
+builder.Services.AddDbContext<AppDbContext>(opt =>
+    opt.UseSqlite(
+        //builder.Configuration.GetConnectionString("DefaultConnection")
+        $"Filename={GetDatabasePath()}"
+        //connectionString
+        ));
 
 var app = builder.Build();
 app.UseCors("AllowXamarin");
