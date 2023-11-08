@@ -6,12 +6,26 @@
 
   "configurations": [
     {
-      "name": "Debug Tests",
+      "name": "NET API",
       "type": "coreclr",
       "request": "launch",
-      "program": "${workspaceRoot}/NetChallenge.Test/bin/Debug/net7.0/NetChallenge.Test.dll",
+      "preLaunchTask": "dotnet: build",
+      "program": "${workspaceRoot}/NetChallenge/bin/Debug/net7.0/NetChallenge.dll",
       "console": "integratedTerminal",
-      "args": ["--test-adapter", "xunit.runner.dotnet"]
+      // "args": ["--test-adapter", "xunit.runner.dotnet"]
+      "cwd": "${workspaceRoot}/NetChallenge",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
+        "uriFormat": "http://localhost:%s/swagger/index.html"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "sourceFileMap": {
+        "/Views": "${workspaceRoot}/NetChallenge/Views"
+      }
     }
   ]
 }
