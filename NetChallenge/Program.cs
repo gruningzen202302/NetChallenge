@@ -32,11 +32,10 @@ string GetDatabasePath()
 
 }
 builder.Services.AddDbContext<AppDbContext>(opt =>
-    opt.UseSqlite(
-        //builder.Configuration.GetConnectionString("DefaultConnection")
-        $"Filename={GetDatabasePath()}"
-        //connectionString
-        ));
+    {
+        opt.UseSqlite($"Filename={GetDatabasePath()}");
+        opt.EnableSensitiveDataLogging();
+    });
 
 var app = builder.Build();
 app.UseCors("AllowXamarin");
