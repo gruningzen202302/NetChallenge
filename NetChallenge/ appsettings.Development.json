@@ -6,6 +6,6 @@
     }
   },
   "ConnectionStrings": {
-    "DefaultConnection": "Data Source=Rel.db"
+    "DefaultConnection": "Data Source=OfficeBooking.sqlite"
   }
 }

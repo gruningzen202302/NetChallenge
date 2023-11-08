@@ -6,8 +6,8 @@
       }
     },
     "AllowedHosts": "*",
-    "ConnectionStrings": {
-      "DefaultConnection": "Data Source=Rel.db"
-    }
+  "ConnectionStrings": {
+    "DefaultConnection": "Data Source=OfficeBooking.sqlite"
+  }
   }
   

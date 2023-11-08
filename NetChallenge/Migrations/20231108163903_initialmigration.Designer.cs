@@ -10,7 +10,7 @@ using NetChallenge.Data;
 namespace NetChallenge.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231108161959_initialmigration")]
+    [Migration("20231108163903_initialmigration")]
     partial class initialmigration
     {
         /// <inheritdoc />
