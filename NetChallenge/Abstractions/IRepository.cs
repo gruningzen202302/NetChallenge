@@ -7,5 +7,6 @@ namespace NetChallenge.Abstractions
         IEnumerable<T> AsEnumerable();
 
         void Add(T item);
+        IEnumerable<T> GetAll();
     }
 }

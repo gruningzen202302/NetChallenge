@@ -1,5 +1,10 @@
 ﻿using System;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using Moq;
+using NetChallenge.Data;
+using NetChallenge.Domain;
+using NetChallenge.Infrastructure;
 using NetChallenge.Test.Utils;
 using Xunit;
 
@@ -10,7 +15,18 @@ namespace NetChallenge.Test
         [Fact]
         public void AddLocation()
         {
-            var request = AddLocationRequestMother.Default;
+            // Arrange
+            var mockSet = new Mock<DbSet<Location>>();
+            var mockContext = new Mock<AppDbContext>();
+            mockContext.Setup(m => m.Locations).Returns(mockSet.Object);
+
+            // Act
+            var repository = new LocationRepository(mockContext.Object);
+            repository.Add(new Location());
+
+            // Assert
+            mockSet.Verify(m => m.Add(It.IsAny<Location>()), Times.Once());
+                        var request = AddLocationRequestMother.Default;
 
             Service.AddLocation(request);
 

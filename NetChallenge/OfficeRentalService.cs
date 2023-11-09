@@ -22,11 +22,20 @@ namespace NetChallenge
 
         public void AddLocation(AddLocationRequest request)
         {
+            try
+            {
             Location location = new Location();
             location.Neighborhood = request.Neighborhood;
             location.Name = request.Name;
 
             _locationRepository.Add(location);
+                
+            }
+            catch (System.Exception e)
+            {
+                
+                throw e;
+            }
         }
 
         public void AddOffice(AddOfficeRequest request)
@@ -46,7 +55,7 @@ namespace NetChallenge
 
         public IEnumerable<LocationDto> GetLocations()
         {
-            throw new NotImplementedException();
+            return _locationRepository.GetAll() as IEnumerable<LocationDto>;
         }
 
         public IEnumerable<OfficeDto> GetOffices(string locationName)

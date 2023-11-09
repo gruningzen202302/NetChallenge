@@ -6,6 +6,10 @@ namespace NetChallenge.Infrastructure
 {
     public class BookingRepository : IBookingRepository
     {
+        public BookingRepository()
+        {
+        }
+
         public IEnumerable<Booking> AsEnumerable()
         {
             throw new System.NotImplementedException();
@@ -15,5 +19,7 @@ namespace NetChallenge.Infrastructure
         {
             throw new System.NotImplementedException();
         }
+
+        public IEnumerable<Booking> GetAll()=> new List<Booking>();
     }
 }

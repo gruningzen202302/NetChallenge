@@ -15,5 +15,8 @@ namespace NetChallenge.Infrastructure
         {
             throw new System.NotImplementedException();
         }
+
+        public IEnumerable<Office> GetAll()=> new List<Office>();
+    
     }
 }

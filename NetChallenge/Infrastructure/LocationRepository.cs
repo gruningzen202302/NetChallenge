@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using NetChallenge.Abstractions;
 using NetChallenge.Data;
@@ -23,5 +24,8 @@ namespace NetChallenge.Infrastructure
         {
             context.Locations.Add(item);
         }
+
+        public IEnumerable<Location> GetAll() => context.Locations.ToList();
+
     }
 }
