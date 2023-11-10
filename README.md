@@ -1,131 +1,131 @@
 # Challenge .NET
 
-## Introduccion
+## Introduction
 
-*Se dispone de una cadena de locales de oficinas distribuidos por toda la ciudad.
-Las oficinas se alquilan por hora individualmente.
-Se necesita un sistema que administre las reservas optimizando el uso de cada oficina segun su capacidad y recursos disponibles (pizarra, proyector, acceso a internet, etc.).
-Las reservas se hacen back-to-back, no hace falta considerar ningun tiempo entre el fin de una reserva y el inicio de la siguiente.*
+*There is a chain of office premises distributed throughout the city.
+Offices are rented by the hour individually.
+A system is needed that manages reservations, optimizing the use of each office according to its capacity and available resources (whiteboard, projector, internet access, etc.).
+Reservations are made back-to-back, there is no need to consider any time between the end of one reservation and the start of the next.*
 
-## Funcionalidad requerida
+## Required functionality
 
-La interface *IOfficeRentalService* actua como punto de entrada para todas las operaciones.
+The *IOfficeRentalService* interface acts as the entry point for all operations.
 
 **AddLocation**
-Agregar un local nuevo.
+Add a new location.
 
 **GetLocations**
-Obtener el listado de locales.
+Get the list of premises.
 
 **AddOffice**
-Agregar una oficina a un local.
+Add an office to a premises.
 
 **GetOffices**
-Obtener todas las oficinas de un local.
+Obtain all the offices of a location.
 
 **BookOffice**
-Reservar una oficina.
+Reserve an office.
 
 **GetBookings**
-Obtener un listado de reservas de una oficina.
+Obtain a list of reservations from an office.
 
 **GetOfficeSuggestion**
-Obtener un listado de oficinas que coincidan con las especificaciones, ordenados por conveniencia.
-Las sugerencias tiene que cumplir estas condiciones:
+Obtain a list of offices that match your specifications, sorted by convenience.
+The suggestions must meet these conditions:
 
-- permitir la capacidad necesaria
-- tener todos los recursos solicitados
-- es preferible reservar una oficina en el barrio solicitado pero si no hay ninguna se pueden sugerir otros locales
-- es preferible mantener libres las oficinas mas grandes
-- es preferible mantener libres las oficinas con mas recursos de los que se requieren
+- allow the necessary capacity
+- have all the requested resources
+- it is preferable to reserve an office in the requested neighborhood but if there is none, other locations can be suggested
+- it is preferable to keep the largest offices free
+- it is preferable to keep offices free with more resources than are required
 
-Las sugerencias deben devolver todas las oficinas que cumplan las condiciones.
-Las preferencias deben establecer el orden de los resultado, siendo la primera la que mayor coincidencia tiene con la consulta.
+Suggestions must return all offices that meet the conditions.
+The preferences must establish the order of the results, with the first being the one that most closely matches the query.
 
-## Proyecto
+## Project
 
 ### NetChallenge/Abstractions
 
-Contiene las abstracciones de accesso a datos IBookingRepository, ILocationRepository y IOfficeRepository.
+Contains the IBookingRepository, ILocationRepository, and IOfficeRepository data access abstractions.
 
 ### NetChallenge/Domain
 
-Contiene las clases de negocio.
+Contains business classes.
 
-- Location: es un local que puede contener varias oficinas
-  - El nombre no puede estar vacio.
-  - El barrio no puede estar vacio.
-  - El nombre no puede repetirse.
+- Location: it is a location that can contain several offices
+- The name cannot be empty.
+- The neighborhood cannot be empty.
+- The name cannot be repeated.
 
-- Office: es una oficina dentro de un local.
-  - Debe pertenecer a un local valido.
-  - El nombre no puede estar vacio.
-  - El nombre no puede repetirse dentro del mismo local.
-  - La capacidad maxima debe ser mayor a cero.
-  - Puede tener cero o mas recursos disponibles.
+- Office: it is an office within a premises.
+  - Must belong to a valid location.
+  - The name cannot be empty.
+  - The name cannot be repeated within the same premises.
+  - The maximum capacity must be greater than zero.
+  - May have zero or more resources available.
 
-- Booking: representa la reserva de una oficina para una fecha y un horario determinado.
-  - Debe pertenecer a una oficina valida.
-  - Debe tener una duracion mayor a cero.
-  - No se debe superponer con otras reservas de la misma oficina.
-  - El usuario que hace la reserva es obligatorio.
+- Booking: represents the reservation of an office for a specific date and time.
+  - Must belong to a valid office.
+  - It must have a duration greater than zero.
+  - It should not overlap with other reservations from the same office.
+  - The user who makes the reservation is required.
 
 ### NetChallenge/Dto/Input
 
-Contiene los DTO con los parametros de entrada para cada funcionalidad.
+Contains the DTOs with the input parameters for each functionality.
 
 ### NetChallenge/Dto/Output
 
-Contiene los DTO de salida con los que se va a responder cada funcionalidad.
+Contains the output DTOs with which each functionality will respond.
 
 ## NetChallenge/Exceptions
 
-Excepciones personalizadas.
+Custom exceptions.
 
 ## NetChallenge/Infrastructure
 
-Implementacion de los **repository**
+**repository** implementation
 
 ## NetChallenge.Test
 
-Tests unitarios para validar la logica implementada.
+Unit tests to validate the implemented logic.
 
-## Resultado
+## Result
 
-Se espera una implementacion que cumpla con la funcionalidad solicitada y pase todos los tests.
+An implementation is expected that meets the requested functionality and passes all the tests.
 
-Que se espera que se modifique:
+What is expected to be modified:
 
-- **Abstractions** No face falta modificar ninguna de las interfaces.
-- **Domain** Se deben implementar las entidades de negocio siguiendo las buenas practicas de Domain-Driven Design.
-- **Dto** No se debe modificar.
-- **Infrastructure** Se deben implementar las abstracciones de los repository. Los datos se mantienen en memoria.
-- **Excepciones** Se deben implementar las excepciones que hagan falta.
-- **OfficeRentalService** Se debe implementar toda la funcionalidad. No es necesario que toda la logica esta en esta clase, pero se que se mantenga su interface como punto de entrada.
-- Tests: No se deben modificar los tests existentes. Si se requieren tests extra se puede agregar otra clase.
+- **Abstractions** There is no need to modify any of the interfaces.
+- **Domain** Business entities must be implemented following Domain-Driven Design good practices.
+- **Discount** It should not be modified.
+- **Infrastructure** Repository abstractions must be implemented. The data is kept in memory.
+- **Exceptions** Any necessary exceptions must be implemented.
+- **OfficeRentalService** All functionality must be implemented. It is not necessary that all the logic is in this class, but be sure to keep its interface as an entry point.
+- Tests: Existing tests should not be modified. If extra tests are required, another class can be added.
 
-### Requerimientos
+### Requirements
 
-- Deben pasar todos los tests.
-- La implementacion debe resolver la funcionalidad requerida, no solamente la que esta en los tests.
-- No es necesario agregar referencias externas
-- El codigo debe escribirse en ingles.
-- Se deben aplicar los principios de **Clean Code** y **SOLID**
-- Se debe implementar una capa de negocio robusta siguiendo los principios del Domain-Driven Design.
-- Se debe hacer un correcto manejo de excepciones.
-- Se prefiere el uso de Linq y esta visto como una mala practica la iteracion de colecciones para buscar datos.
+- They must pass all the tests.
+- The implementation must resolve the required functionality, not just what is in the tests.
+- No need to add external references
+- The code must be written in English.
+- **Clean Code** and **SOLID** principles must be applied
+- A robust business layer must be implemented following the principles of Domain-Driven Design.
+- Correct exception handling must be done.
+- The use of Linq is preferred and iterating collections to search for data is seen as bad practice.
 
-### Se tendra en cuenta
+### Will be taken into account
 
-- Comprension de la problematica planteada
-- Calidad de la solucion
-- Deteccion de necesidades ocultas
-- Prolijidad de los entregables
+- Understanding of the problem raised
+- Quality of the solution
+- Detection of hidden needs
+- Neatness of deliverables
 - Clean Code
-- Principios SOLID
-- Testeablidad
-- Extensibilidad
-- Manejo de errores
-- Conceptos de Domain-Driven Design
+- SOLID principles
+- Testability
+- Extensibility
+- Error handling
+- Domain-Driven Design Concepts
 
-La entrevista tecnica posterior consistira en la argumentacion y revision del proyecto presentado
+    The subsequent technical interview will consist of the argument and review of the project presented
