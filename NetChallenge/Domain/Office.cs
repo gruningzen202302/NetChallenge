@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace NetChallenge.Domain
 {
@@ -7,6 +8,6 @@ namespace NetChallenge.Domain
         public string LocationName { get; set; }
         public string Name { get; set; }
         public int MaxCapacity { get; set; }
-        //public ICollection<string> AvailableResources { get; set; }
+        public virtual ICollection<AvailableResource> AvailableResources { get; set; }
     }
 }
