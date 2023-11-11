@@ -11,6 +11,12 @@ namespace NetChallenge.Data{
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Location>()
+            .HasMany(location=>location.Offices)
+            .WithOne(office=>office.Location)
+            .HasForeignKey(office=> office.LocationId)
+            ;
+
             modelBuilder.Entity<Office>()
                 .HasMany(office => office.AvailableResources)
                 .WithOne(availableResource => availableResource.Office)
