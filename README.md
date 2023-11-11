@@ -2,7 +2,7 @@
 
 ## Introduction
 
-*There is a chain of office premises distributed throughout the city.
+*There is a chain of offices for rental distributed throughout the city.
 Offices are rented by the hour individually.
 A system is needed that manages reservations, optimizing the use of each office according to its capacity and available resources (whiteboard, projector, internet access, etc.).
 Reservations are made back-to-back, there is no need to consider any time between the end of one reservation and the start of the next.*
@@ -106,7 +106,7 @@ What is expected to be modified:
 
 ### Requirements
 
-- They must pass all the tests.
+- All the tests must pass.
 - The implementation must resolve the required functionality, not just what is in the tests.
 - No need to add external references
 - The code must be written in English.
