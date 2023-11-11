@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using NetChallenge.Abstractions;
+using NetChallenge.Data;
 using NetChallenge.Domain;
 using NetChallenge.Dto.Input;
 using NetChallenge.Dto.Output;
+using NetChallenge.Infrastructure;
 
 namespace NetChallenge
 {
@@ -12,6 +16,7 @@ namespace NetChallenge
         private readonly ILocationRepository _locationRepository;
         private readonly IOfficeRepository _officeRepository;
         private readonly IBookingRepository _bookingRepository;
+        private readonly DbContext _context;
 
         public OfficeRentalService(ILocationRepository locationRepository, IOfficeRepository officeRepository, IBookingRepository bookingRepository)
         {
@@ -20,22 +25,22 @@ namespace NetChallenge
             _bookingRepository = bookingRepository;
         }
 
+        public OfficeRentalService(ILocationRepository locationRepository, IOfficeRepository officeRepository, IBookingRepository bookingRepository, DbContext context )
+        {
+            _context = context;
+            _locationRepository = new LocationRepository(_context as AppDbContext);
+            _officeRepository = officeRepository;
+            _bookingRepository = bookingRepository;
+        }
         public void AddLocation(AddLocationRequest request)
         {
-            try
-            {
-            Location location = new Location();
-            location.Neighborhood = request.Neighborhood;
-            location.Name = request.Name;
+                Location location = new Location();
+                location.Neighborhood = request.Neighborhood;
+                location.Name = request.Name;
 
-            _locationRepository.Add(location);
+                _locationRepository.Add(location);
                 
-            }
-            catch (System.Exception e)
-            {
-                
-                throw e;
-            }
+            
         }
 
         public void AddOffice(AddOfficeRequest request)
@@ -55,7 +60,13 @@ namespace NetChallenge
 
         public IEnumerable<LocationDto> GetLocations()
         {
-            return _locationRepository.GetAll() as IEnumerable<LocationDto>;
+
+            return _locationRepository.GetAll()
+            .ToList()
+            .Select(x=> new LocationDto{
+                Name = x.Name, Neighborhood = x.Neighborhood,
+            }) ;
+            //as IEnumerable<LocationDto>;
         }
 
         public IEnumerable<OfficeDto> GetOffices(string locationName)

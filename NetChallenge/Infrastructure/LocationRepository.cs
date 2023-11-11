@@ -4,13 +4,19 @@ using Microsoft.EntityFrameworkCore;
 using NetChallenge.Abstractions;
 using NetChallenge.Data;
 using NetChallenge.Domain;
+using NetChallenge.Dto.Input;
 
 namespace NetChallenge.Infrastructure
 {
     public class LocationRepository : ILocationRepository
     {
+
+        private List<Location> context_Locations = new();
         private readonly AppDbContext context;
-        public LocationRepository(){}
+        public LocationRepository()
+        {
+            //context_Locations = new List<Location>();
+        }
         public LocationRepository(AppDbContext context)
         {
             this.context = context;
@@ -20,12 +26,21 @@ namespace NetChallenge.Infrastructure
             throw new System.NotImplementedException();
         }
 
-        public void Add(Location item)
+        public void Add(Location location)
         {
-            context.Locations.Add(item);
+            if (context is null) { context_Locations.Add(location); return; }
+
+            context.Locations.Add(location);
         }
 
-        public IEnumerable<Location> GetAll() => context.Locations.ToList();
+        public IEnumerable<Location> GetAll()
+        {
+
+            if (context is null) return context_Locations.ToList();
+
+            return context.Locations.ToList();
+
+        }
 
     }
 }
