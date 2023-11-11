@@ -1,5 +1,7 @@
 # Challenge .NET
 
+[![GitHub Actions Status](https://img.shields.io/github/workflow/status/gruningzen202302/NetChallenge/Node.js%20CI?label=Tests)](https://github.com/gruningzen202302/NetChallenge/actions)
+
 ## Introduction
 
 *There is a chain of offices for rental distributed throughout the city.
