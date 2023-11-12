@@ -1,6 +1,7 @@
 # Challenge .NET
 
-[![stars](https://badgen.net/github/stars/gruningzen202302/NetChallenge)](https://github.com/gruningzen202302/NetChallenge)&nbsp;[![coverage](https://badgen.net/coveralls/c/github/gruningzen202302/NetChallenge/release)](https://coveralls.io/github/gruningzen202302/NetChallenge)&nbsp;[![stars](https://badgen.net/github/stars/gruningzen202302/NetChallenge)](https://github.com/gruningzen202302/NetChallenge)&nbsp;[![GitHub Actions Status](https://img.shields.io/github/workflow/status/gruningzen202302/NetChallenge/Node.js%20CI?label=Tests)](https://github.com/gruningzen202302/NetChallenge/actions)
+[![stars](https://badgen.net/github/stars/gruningzen202302/NetChallenge)](https://github.com/gruningzen202302/NetChallenge)&nbsp;[![coverage](https://badgen.net/coveralls/c/github/gruningzen202302/NetChallenge/release)](https://coveralls.io/github/gruningzen202302/NetChallenge)&nbsp;[![stars](https://badgen.net/github/stars/gruningzen202302/NetChallenge)](https://github.com/gruningzen202302/NetChallenge)&nbsp;[![GitHub Actions Status](https://img.shields.io/github/workflow/status/gruningzen202302/NetChallenge/Node.js%20CI?label=Tests)](https://github.com/gruningzen202302/NetChallenge/actions) [![NetChallenge](https://badgen.net/github/license/gruningzen202302/NetChallenge?label=NetChallenge)](https://github.com/gruningzen202302/NetChallenge)&nbsp;
+
 
 ## Introduction
 
