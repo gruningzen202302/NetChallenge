@@ -13,7 +13,7 @@ builder.Services.AddCors(options=>{
     options.AddPolicy("AllowXamarin", builder =>{
         builder
         .AllowAnyOrigin()
-        //.WithOrigins("http://localhost:8081","http://192.168.1.24:8081")
+        //.WithOrigins("http://localhost:8081","http://192.168.1.24:8081")//TODO if the wildcard fails try this verbosity 
         .AllowAnyMethod()
         .AllowAnyHeader();
     });

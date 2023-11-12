@@ -9,7 +9,7 @@ namespace NetChallenge.Test.Utils
             LocationName = AddLocationRequestMother.Default.Name,
             Name = "Default Office",
             MaxCapacity = 10,
-            AvailableResources = new[] { "Internet" }
+            Facilities = new[] { "Internet" }
         };
 
         public static AddOfficeRequest Blue => Default
@@ -44,7 +44,7 @@ namespace NetChallenge.Test.Utils
 
         public static AddOfficeRequest WithAvailableResources(this AddOfficeRequest request, params string[] resources)
         {
-            request.AvailableResources = resources;
+            request.Facilities = resources;
             return request;
         }
     }

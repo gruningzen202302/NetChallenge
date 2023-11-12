@@ -4,8 +4,8 @@ namespace NetChallenge.Dto.Input
 {
     public class SuggestionsRequest
     {
-        public int CapacityNeeded { get; set; }
-        public string PreferedNeigborHood { get; set; }
-        public IEnumerable<string> ResourcesNeeded { get; set; }
+        public int MinCapacity { get; set; }
+        public string NeigborHoodPrefference { get; set; }
+        public IEnumerable<string> FacilitiesEssentials { get; set; }
     }
 }

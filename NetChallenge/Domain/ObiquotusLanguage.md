@@ -47,3 +47,13 @@ Plural term (for lack of other convention): this means "a collection of Facility
     Office.Facilities
 
 Note: If the convention , or the configuration of the code automatically generates plurals adding `S` (i.e singular Person, plural Persons instead of singular Person, plural People) then the term Office.Facilitys will be used in the code meaning: a collection of Facility items.
+
+## Office Capacity
+
+In this Domain this concept
+
+    The bigger office
+
+means The office with the maximum Capacity for It's use. Therefor, It is measured in interger numbers (quantity of people able to use the office simultaneusly)
+
+A office can have more square meters , but some furniture can reduce the net capacity

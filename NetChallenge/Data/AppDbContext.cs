@@ -18,13 +18,13 @@ namespace NetChallenge.Data{
             ;
 
             modelBuilder.Entity<Office>()
-                .HasMany(office => office.AvailableResources)
+                .HasMany(office => office.Facilities)
                 .WithOne(availableResource => availableResource.Office)
                 .HasForeignKey(availableResource => availableResource.OfficeId);
         }
         protected override void OnConfiguring(DbContextOptionsBuilder options)=>options.UseSqlite();
         public DbSet<Location> Locations => Set<Location>();
         public DbSet<Office> Offices =>Set<Office>();
-        public DbSet<AvailableResource> AvailableResources => Set<AvailableResource>();
+        public DbSet<Facility> AvailableResources => Set<Facility>();
     }
 }

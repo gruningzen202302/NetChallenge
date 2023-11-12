@@ -25,8 +25,8 @@ namespace NetChallenge.Test
             Assert.Equal(request.LocationName, office.LocationName);
             Assert.Equal(request.Name, office.Name);
             Assert.Equal(request.MaxCapacity, office.MaxCapacity);
-            Assert.Equal(request.AvailableResources.Count(), office.AvailableResources.Length);
-            Assert.All(request.AvailableResources, x => Assert.Contains(x, office.AvailableResources));
+            Assert.Equal(request.Facilities.Count(), office.Facilities.Length);
+            Assert.All(request.Facilities, x => Assert.Contains(x, office.Facilities));
         }
 
         [Fact(Skip="Not implemented in TDD")]
@@ -40,8 +40,8 @@ namespace NetChallenge.Test
             Assert.Equal(request.LocationName, office.LocationName);
             Assert.Equal(request.Name, office.Name);
             Assert.Equal(request.MaxCapacity, office.MaxCapacity);
-            Assert.Equal(request.AvailableResources.Count(), office.AvailableResources.Length);
-            Assert.Empty(office.AvailableResources);
+            Assert.Equal(request.Facilities.Count(), office.Facilities.Length);
+            Assert.Empty(office.Facilities);
         }
 
         [Fact(Skip="Not implemented in TDD")]

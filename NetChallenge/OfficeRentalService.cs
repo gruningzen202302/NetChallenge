@@ -58,16 +58,16 @@ namespace NetChallenge
             throw new NotImplementedException();
         }
 
-        public IEnumerable<LocationDto> GetLocations()
-        {
-
-            return _locationRepository.GetAll()
+        public IEnumerable<LocationDto> GetLocations() => _locationRepository
+            .GetAll()
+            //.AsQueryable()//TODO try this to delay materialization and run test again
             .ToList()
-            .Select(x=> new LocationDto{
-                Name = x.Name, Neighborhood = x.Neighborhood,
-            }) ;
-            //as IEnumerable<LocationDto>;
-        }
+            .Select(x => new LocationDto
+            {
+                Name = x.Name,
+                Neighborhood = x.Neighborhood,
+            });
+
 
         public IEnumerable<OfficeDto> GetOffices(string locationName)
         {

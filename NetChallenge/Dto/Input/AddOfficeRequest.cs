@@ -7,6 +7,6 @@ namespace NetChallenge.Dto.Input
         public string LocationName { get; set; }
         public string Name { get; set; }
         public int MaxCapacity { get; set; }
-        public IEnumerable<string> AvailableResources { get; set; }
+        public IEnumerable<string> Facilities { get; set; }
     }
 }

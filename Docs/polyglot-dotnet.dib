@@ -1,3 +1,17 @@
 #!meta
 
 {"kernelInfo":{"defaultKernelName":"csharp","items":[{"aliases":[],"languageName":"csharp","name":"csharp"}]}}
+
+#!csharp
+
+Console.WriteLine("Develop in NET7 with notebooks for C#")
+
+#!markdown
+
+# Composite primary keys in EF
+
+#!csharp
+
+var table = "UnknownTable";
+
+Console.WriteLine($"Table name is {table}");
