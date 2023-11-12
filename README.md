@@ -1,20 +1,16 @@
 # Challenge .NET
 
 
-[![CI status](https://github.com/valentjn/vscode-ltex/workflows/CI/badge.svg?branch=release)](https://github.com/gruningzen202302/NetChallenge/actions?query=workflow%3A%22CI%22+branch%3Arelease)&nbsp;
+[![CI status](https://github.com/gruningzen202302/NetChallenge/workflows/CI/badge.svg?branch=release)](https://github.com/gruningzen202302/NetChallenge/actions?query=workflow%3A%22CI%22+branch%3Arelease)&nbsp;
 
 [![stars](https://badgen.net/github/stars/gruningzen202302/NetChallenge)](https://github.com/gruningzen202302/NetChallenge)&nbsp;
 
-[![open issues](https://badgen.net/github/open-issues/gruningzen202302/NetChallenge?label=open/closed%20issues&color=blue)](https://github.com/gruningzen202302/NetChallenge/issues)&nbsp;
-
 [![closed issues](https://badgen.net/github/closed-issues/gruningzen202302/NetChallenge?label=)](https://github.com/gruningzen202302/NetChallenge/issues)\
-[![ltex-ls](https://badgen.net/github/license/gruningzen202302/NetChallenge?label=ltex-ls)](https://github.com/gruningzen202302/NetChallenge)&nbsp;
+[![NetChallenge](https://badgen.net/github/license/gruningzen202302/NetChallenge?label=NetChallenge)](https://github.com/gruningzen202302/NetChallenge)&nbsp;
 
 [![coverage](https://badgen.net/coveralls/c/github/gruningzen202302/NetChallenge/release)](https://coveralls.io/github/gruningzen202302/NetChallenge)&nbsp;
 
 [![stars](https://badgen.net/github/stars/gruningzen202302/NetChallenge)](https://github.com/gruningzen202302/NetChallenge)&nbsp;
-
-[![open issues](https://badgen.net/github/open-issues/gruningzen202302/NetChallenge?label=open/closed%20issues&color=blue)](https://github.com/gruningzen202302/NetChallenge/issues)&nbsp;[![closed issues](https://badgen.net/github/closed-issues/gruningzen202302/NetChallenge?label=)](https://github.com/gruningzen202302/NetChallenge/issues)
 
 
 
