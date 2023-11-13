@@ -14,5 +14,6 @@ namespace NetChallenge.Domain
         public int LocationId { get; set; }
         public virtual Location Location { get; set; }
         public virtual ICollection<Facility> Facilities { get; set; }
+        public virtual List<Booking> Bookings { get; set; }
     }
 }

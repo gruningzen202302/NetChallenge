@@ -15,8 +15,7 @@ namespace NetChallenge.Data{
             modelBuilder.Entity<Location>()
             .HasMany(location=>location.Offices)
             .WithOne(office=>office.Location)
-            .HasForeignKey(office=> office.LocationId)
-            ;
+            .HasForeignKey(office=> office.LocationId);
 
             modelBuilder.Entity<Office>()
                 .HasMany(office => office.Facilities)
@@ -24,14 +23,17 @@ namespace NetChallenge.Data{
                 .HasForeignKey(facility => facility.OfficeId);
             modelBuilder.Entity<Office>()
                 .HasKey(o => new { o.Id, o.LocationId });
-            // modelBuilder.Entity<Office>()
-            //     .HasForeignKey(office => office.LocationId)
-            //     .HasConstraintName("FK_Office_Location");
-
+            
             modelBuilder.Entity<Facility>()
                 .HasOne(facility => facility.Office)
                 .WithMany(office => office.Facilities)
                 .HasForeignKey(facility => new { facility.OfficeId, facility.LocationId });
+            
+            modelBuilder.Entity<Booking>()
+                .HasOne(b => b.Office)
+                .WithMany()
+                .HasForeignKey("OfficeId")
+                .OnDelete(DeleteBehavior.Restrict); 
         }
         protected override void OnConfiguring(DbContextOptionsBuilder options)=>options.UseSqlite();
         public DbSet<Location> Locations => Set<Location>();
