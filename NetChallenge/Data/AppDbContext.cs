@@ -36,6 +36,7 @@ namespace NetChallenge.Data{
         protected override void OnConfiguring(DbContextOptionsBuilder options)=>options.UseSqlite();
         public DbSet<Location> Locations => Set<Location>();
         public DbSet<Office> Offices =>Set<Office>();
-        public DbSet<Facility> AvailableResources => Set<Facility>();
+        public DbSet<Facility> Facilities => Set<Facility>();
+        public DbSet<Booking> Bookings => Set<Booking>();
     }
 }
