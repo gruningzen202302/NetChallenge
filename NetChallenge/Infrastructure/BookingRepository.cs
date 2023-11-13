@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NetChallenge.Abstractions;
 using NetChallenge.Data;
 using NetChallenge.Domain;
@@ -11,7 +12,32 @@ public class BookingRepository : IBookingRepository
 {
     private List<Booking> context_Bookings = new(){
         new(){
-
+            User= new(){
+                Name="John Doe",
+                Email="john001@gmail.com"
+            },
+            DateTime = new DateTime(2023,12,24,0,0,0),
+            Duration = TimeSpan.FromHours(2),
+            Office = new(){
+                Name="Soho",
+                Location= new(){
+                    Name="New York",
+                }
+            },
+        },
+            new(){
+            User= new(){
+                Name="Monica Smith",
+                Email="monica123@gmail.com"
+            },
+            DateTime = new DateTime(2023,12,25,0,0,0),
+            Duration = TimeSpan.FromHours(2),
+            Office = new(){
+                Name="Soho",
+                Location= new(){
+                    Name="New York",
+                }
+            },
         }
     };
     private readonly AppDbContext _context;
@@ -48,4 +74,10 @@ public class BookingRepository : IBookingRepository
     }
 
     public IEnumerable<Booking> GetAll()=> new List<Booking>();
+
+    public Booking GetOne(Func<Booking, bool> predicate)
+    {
+        if(_context is null) return context_Bookings.Single(predicate);
+            return _context.Bookings.Single(predicate) ;
+    }
 }

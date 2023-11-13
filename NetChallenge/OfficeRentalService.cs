@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using NetChallenge.Abstractions;
 using NetChallenge.Data;
@@ -13,24 +14,27 @@ namespace NetChallenge
 {
     public class OfficeRentalService
     {
+        private readonly IMapper _mapper;
         private readonly ILocationRepository _locationRepository;
         private readonly IOfficeRepository _officeRepository;
         private readonly IBookingRepository _bookingRepository;
         private readonly DbContext _context;
 
-        public OfficeRentalService(ILocationRepository locationRepository, IOfficeRepository officeRepository, IBookingRepository bookingRepository)
+        public OfficeRentalService(ILocationRepository locationRepository, IOfficeRepository officeRepository, IBookingRepository bookingRepository, IMapper mapper)
         {
             _locationRepository = locationRepository;
             _officeRepository = officeRepository;
             _bookingRepository = bookingRepository;
+            _mapper = mapper;
         }
 
-        public OfficeRentalService(ILocationRepository locationRepository, IOfficeRepository officeRepository, IBookingRepository bookingRepository, DbContext context )
+        public OfficeRentalService(ILocationRepository locationRepository, IOfficeRepository officeRepository, IBookingRepository bookingRepository, DbContext context, IMapper mapper)
         {
             _context = context;
             _locationRepository = new LocationRepository(_context as AppDbContext);
             _officeRepository = officeRepository;
             _bookingRepository = bookingRepository;
+            _mapper = mapper;
         }
         public void AddLocation(AddLocationRequest request)
         {
@@ -48,8 +52,9 @@ namespace NetChallenge
             throw new NotImplementedException();
         }
 
-        public void BookOffice(BookOfficeRequest request)
+        public void BookOffice(BookOfficeRequest bookOfficeRequest)
         {
+            var office = _officeRepository.GetAll();
             throw new NotImplementedException();
         }
 

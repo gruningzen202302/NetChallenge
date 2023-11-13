@@ -1,8 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace NetChallenge.Domain;
 
 public class User : EntityBase
 {
     public string Name { get; set; }
+    public required string Email { get; set; }
 
-    //TODO consider public string Email {get; set;} if an extra key value is needed (other than the inhereted Id)
 }

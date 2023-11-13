@@ -11,11 +11,13 @@ namespace NetChallenge.Data{
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            //            modelBuilder.Entity<Location>()
+            //                .HasKey(compositeKey => new { compositeKey.Id, compositeKey.Name });
 
             modelBuilder.Entity<Location>()
-            .HasMany(location=>location.Offices)
-            .WithOne(office=>office.Location)
-            .HasForeignKey(office=> office.LocationId);
+                .HasMany(location => location.Offices)
+                .WithOne(office => office.Location)
+                .HasForeignKey(office => office.LocationId);
 
             modelBuilder.Entity<Office>()
                 .HasMany(office => office.Facilities)
@@ -33,7 +35,11 @@ namespace NetChallenge.Data{
                 .HasOne(b => b.Office)
                 .WithMany()
                 .HasForeignKey(fk => new { fk.OfficeId, fk.LocationId })
-                .OnDelete(DeleteBehavior.Restrict); 
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<User>()
+                .Property(u => u.Email)
+                .IsRequired();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder options)=>options.UseSqlite();
         public DbSet<Location> Locations => Set<Location>();

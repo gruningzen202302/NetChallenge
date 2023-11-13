@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using NetChallenge.Abstractions;
@@ -11,15 +12,22 @@ namespace NetChallenge.Infrastructure
     public class LocationRepository : ILocationRepository
     {
 
-        private List<Location> context_Locations = new();
-        private readonly AppDbContext context;
+        private List<Location> context_Locations = new(){
+            new(){
+                Name="New York",
+            },
+            new(){
+                Name="Mexico DF",
+            }
+        };
+        private readonly AppDbContext _context;
         public LocationRepository()
         {
             //context_Locations = new List<Location>();
         }
         public LocationRepository(AppDbContext context)
         {
-            this.context = context;
+            this._context = context;
         }
         public IEnumerable<Location> AsEnumerable()
         {
@@ -28,19 +36,24 @@ namespace NetChallenge.Infrastructure
 
         public void Add(Location location)
         {
-            if (context is null) { context_Locations.Add(location); return; }
+            if (_context is null) { context_Locations.Add(location); return; }
 
-            context.Locations.Add(location);
+            _context.Locations.Add(location);
         }
 
         public IEnumerable<Location> GetAll()
         {
 
-            if (context is null) return context_Locations.ToList();
+            if (_context is null) return context_Locations.ToList();
 
-            return context.Locations.ToList();
+            return _context.Locations.ToList();
 
         }
 
+        public Location GetOne(Func<Location, bool> predicate)
+        {
+            if(_context is null) return context_Locations.Single(predicate);
+            return _context.Locations.Single(predicate) ;
+        }
     }
 }

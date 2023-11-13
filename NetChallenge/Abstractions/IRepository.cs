@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace NetChallenge.Abstractions
 {
@@ -8,5 +9,6 @@ namespace NetChallenge.Abstractions
 
         void Add(T item);
         IEnumerable<T> GetAll();
+        T GetOne(Func<T, bool> predicate);
     }
 }
