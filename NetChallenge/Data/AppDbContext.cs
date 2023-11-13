@@ -27,12 +27,12 @@ namespace NetChallenge.Data{
             modelBuilder.Entity<Facility>()
                 .HasOne(facility => facility.Office)
                 .WithMany(office => office.Facilities)
-                .HasForeignKey(facility => new { facility.OfficeId, facility.LocationId });
-            
+                .HasForeignKey(fk => new { fk.OfficeId, fk.LocationId });
+
             modelBuilder.Entity<Booking>()
                 .HasOne(b => b.Office)
                 .WithMany()
-                .HasForeignKey("OfficeId")
+                .HasForeignKey(fk => new { fk.OfficeId, fk.LocationId })
                 .OnDelete(DeleteBehavior.Restrict); 
         }
         protected override void OnConfiguring(DbContextOptionsBuilder options)=>options.UseSqlite();
@@ -40,5 +40,6 @@ namespace NetChallenge.Data{
         public DbSet<Office> Offices =>Set<Office>();
         public DbSet<Facility> Facilities => Set<Facility>();
         public DbSet<Booking> Bookings => Set<Booking>();
+        public DbSet<User> Users => Set<User>();
     }
 }

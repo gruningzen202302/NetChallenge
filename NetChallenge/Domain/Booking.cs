@@ -4,14 +4,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NetChallenge.Domain
 {
-    public class Booking
+    public class Booking : EntityBase
     {
-        public virtual Office Office { get; set; }
-        //[Required, ForeignKey("OfficeId")] 
         public int OfficeId { get; set; }
-        public virtual User User { get; set; }
-        //[Required, ForeignKey("UserId")] 
+        public int LocationId {get; set; }
+        public virtual Office Office { get; set; }
         public int UserId { get; set; }
+        public virtual User User { get; set; }
         [Required] public DateTime DateTime { get; set; }
         public TimeSpan Duration { get; set; }
     }

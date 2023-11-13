@@ -40,6 +40,12 @@ public class BookingRepository : IBookingRepository
     {
         throw new NotImplementedException();
     }
+    private bool ValidateOffice(Office office){
+        if(office is null) return false;
+        //bool 
+        //if()
+        return true;
+    }
 
     public IEnumerable<Booking> GetAll()=> new List<Booking>();
 }
