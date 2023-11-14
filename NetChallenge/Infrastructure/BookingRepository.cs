@@ -4,13 +4,14 @@ using System.Linq;
 using NetChallenge.Abstractions;
 using NetChallenge.Data;
 using NetChallenge.Domain;
+using NetChallenge.Migrations;
 using SQLitePCL;
 
 namespace NetChallenge.Infrastructure;
 
 public class BookingRepository : IBookingRepository
 {
-    private List<Booking> context_Bookings = new(){
+    private List<Booking> _context_Bookings = new(){
         new(){
             User= new(){
                 Name="John Doe",
@@ -47,14 +48,15 @@ public class BookingRepository : IBookingRepository
         _context = context; 
     }
 
-    public IEnumerable<Booking> AsEnumerable()
+    public IEnumerable<Booking> GetAll()
     {
-        throw new System.NotImplementedException();
+        if (_context is null) return _context_Bookings.AsEnumerable();
+        return _context.Bookings.AsEnumerable();
     }
 
     public void Add(Booking booking)
     {
-        if(_context is null){ context_Bookings.Add(booking);}
+        if(_context is null){ _context_Bookings.Add(booking);}
 
         bool userValidationSuccedded = this.ValidateUser(booking);
         if(!userValidationSuccedded) throw new Exception("There was a problem with the user");
@@ -73,11 +75,22 @@ public class BookingRepository : IBookingRepository
         return true;
     }
 
-    public IEnumerable<Booking> GetAll()=> new List<Booking>();
+    public IEnumerable<Booking> GetAllDeprecated() => throw new NotImplementedException();
 
     public Booking GetOne(Func<Booking, bool> predicate)
     {
-        if(_context is null) return context_Bookings.Single(predicate);
+        if(_context is null) return _context_Bookings.Single(predicate);
             return _context.Bookings.Single(predicate) ;
+    }
+
+    public IEnumerable<Booking> GetSome(Func<Booking, bool> predicate)
+    {
+        IEnumerable<Booking> bookings = Enumerable.Empty<Booking>();
+        if(_context is null){
+            bookings = _context_Bookings.Where(predicate);
+        } else {
+            bookings = _context.Bookings.Where(predicate);
+        }
+        return bookings;
     }
 }

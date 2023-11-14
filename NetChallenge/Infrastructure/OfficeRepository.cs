@@ -11,7 +11,7 @@ namespace NetChallenge.Infrastructure
 {
     public class OfficeRepository : IOfficeRepository
     {
-        private List<Office> context_Offices = new(){
+        private List<Office> _context_Offices = new(){
             new(){
                 Name="Soho",
                 Location= new(){
@@ -31,19 +31,19 @@ namespace NetChallenge.Infrastructure
         {
             _context = context;
         }
-        public IEnumerable<Office> AsEnumerable()=> _context.Offices;
+        public IEnumerable<Office> GetAll() => _context.Offices;
 
         public void Add(Office office)
         {
 
             if (_context is null)
             {
-                context_Offices.Add(office); return;
+                _context_Offices.Add(office); return;
             }
             _context.Offices.Add(office);
         }
 
-        public IEnumerable<Office> GetAll()=> new List<Office>();
+        public IEnumerable<Office> GetAllDeprecated() => new List<Office>();
 
         public void GetOne(Func<Office, bool> predicate)
         {
@@ -52,8 +52,30 @@ namespace NetChallenge.Infrastructure
 
         Office IRepository<Office>.GetOne(Func<Office, bool> predicate)
         {
-            if(_context is null) return context_Offices.Single(predicate);
-            return _context.Offices.Single(predicate) ;
+            Office office = null;
+            //TODO replace with FirstOrDefault if the custom Exception implemented handles result >1 
+            if (_context is null)
+            {
+                office = _context_Offices.FirstOrDefault(predicate);
+
+            }
+            else
+            {
+                office = _context.Offices.FirstOrDefault(predicate);
+            }
+            if (office is null) throw new Exception("This office does not exist");
+            return office;
+        }
+
+        public IEnumerable<Office> GetSome(Func<Office, bool> predicate)
+        {
+            IEnumerable<Office> offices= Enumerable.Empty<Office>();
+            if(_context is null){
+                offices = _context_Offices.Where(predicate);
+            } else {
+                offices = _context.Offices.Where(predicate);
+            }
+            return offices;
         }
     }
 }

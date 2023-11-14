@@ -72,7 +72,7 @@ namespace NetChallenge
 
         public void BookOffice(BookOfficeRequest bookOfficeRequest)
         {
-            var offices = _officeRepository.GetAll();
+            var offices = _officeRepository.GetAllDeprecated();
             throw new NotImplementedException();
         }
 
@@ -82,7 +82,7 @@ namespace NetChallenge
         }
 
         public IEnumerable<LocationDto> GetLocations() => _locationRepository
-            .GetAll()
+            .GetAllDeprecated()
             //.AsQueryable()//TODO try this to delay materialization and run test again
             .ToList()
             .Select(x => new LocationDto

@@ -12,7 +12,7 @@ namespace NetChallenge.Infrastructure
     public class LocationRepository : ILocationRepository
     {
 
-        private List<Location> context_Locations = new(){
+        private List<Location> _context_Locations = new(){
             new(){
                 Name="New York",
             },
@@ -29,22 +29,22 @@ namespace NetChallenge.Infrastructure
         {
             this._context = context;
         }
-        public IEnumerable<Location> AsEnumerable()
+        public IEnumerable<Location> GetAll()
         {
             throw new System.NotImplementedException();
         }
 
         public void Add(Location location)
         {
-            if (_context is null) { context_Locations.Add(location); return; }
+            if (_context is null) { _context_Locations.Add(location); return; }
 
             _context.Locations.Add(location);
         }
 
-        public IEnumerable<Location> GetAll()
+        public IEnumerable<Location> GetAllDeprecated()
         {
 
-            if (_context is null) return context_Locations.ToList();
+            if (_context is null) return _context_Locations.ToList();
 
             return _context.Locations.ToList();
 
@@ -56,15 +56,29 @@ namespace NetChallenge.Infrastructure
 
             if (_context is null)
             {
-                location = context_Locations.SingleOrDefault(predicate);
+                location = _context_Locations.FirstOrDefault(predicate);
             }
             else
             {
-                location = _context.Locations.SingleOrDefault(predicate);
+                location = _context.Locations.FirstOrDefault(predicate);
             }
             if (location is null) throw new Exception("Location does not exist");
 
             return location;
+        }
+
+        public IEnumerable<Location> GetSome(Func<Location, bool> predicate)
+        {
+            IEnumerable<Location> locations = Enumerable.Empty<Location>();
+            if (_context is null)
+            {
+                locations = _context_Locations.Where(predicate);
+            }
+            else
+            {
+                locations = _context.Locations.Where(predicate);
+            }
+            return locations;
         }
     }
 }
