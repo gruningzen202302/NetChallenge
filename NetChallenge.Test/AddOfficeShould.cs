@@ -14,7 +14,8 @@ namespace NetChallenge.Test
             Service.AddLocation(AddLocationRequestMother.Palermo);
         }
 
-        [Fact(Skip="Not implemented in TDD")]
+        [Fact]
+        //[Fact(Skip="Not implemented in TDD")]
         public void AddOffice()
         {
             var request = AddOfficeRequestMother.Default;

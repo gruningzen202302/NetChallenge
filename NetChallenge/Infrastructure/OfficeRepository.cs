@@ -33,9 +33,14 @@ namespace NetChallenge.Infrastructure
         }
         public IEnumerable<Office> AsEnumerable()=> _context.Offices;
 
-        public void Add(Office item)
+        public void Add(Office office)
         {
-            throw new System.NotImplementedException();
+
+            if (_context is null)
+            {
+                context_Offices.Add(office); return;
+            }
+            _context.Offices.Add(office);
         }
 
         public IEnumerable<Office> GetAll()=> new List<Office>();

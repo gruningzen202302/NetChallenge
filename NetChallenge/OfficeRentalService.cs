@@ -47,14 +47,32 @@ namespace NetChallenge
             
         }
 
-        public void AddOffice(AddOfficeRequest request)
+        public void AddOffice(AddOfficeRequest officeRequest)
         {
-            throw new NotImplementedException();
+            Office office = new()
+            {
+                Name = officeRequest.Name,
+                MaxCapacity = officeRequest.MaxCapacity,
+            };
+            office.Location = _locationRepository.GetOne(x => x.Name.Equals(officeRequest.LocationName));
+            office.Facilities = this.GetFacilities(officeRequest.Facilities);
+            _officeRepository.Add(office);
+        }
+
+        private ICollection<Facility> GetFacilities(IEnumerable<string> officeRequestFacilities)
+        {
+            List<Facility> facilitiesList = new();
+            foreach (var officeRequestFacility in officeRequestFacilities)
+            {
+                Facility facility = new() { Name = officeRequestFacility };
+                facilitiesList.Add(facility);
+            }
+            return facilitiesList;
         }
 
         public void BookOffice(BookOfficeRequest bookOfficeRequest)
         {
-            var office = _officeRepository.GetAll();
+            var offices = _officeRepository.GetAll();
             throw new NotImplementedException();
         }
 

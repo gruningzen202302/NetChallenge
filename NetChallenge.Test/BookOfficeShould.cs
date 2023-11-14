@@ -16,7 +16,8 @@ namespace NetChallenge.Test
             Service.AddOffice(AddOfficeRequestMother.Red);
         }
 
-        [Fact(Skip="Not implemented in TDD")]
+        [Fact]
+//        [Fact(Skip="Not implemented in TDD")]
         public void BookAnOffice()
         {
             var request = BookOfficeRequestMother.Default;

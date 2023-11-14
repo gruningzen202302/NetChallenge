@@ -52,8 +52,19 @@ namespace NetChallenge.Infrastructure
 
         public Location GetOne(Func<Location, bool> predicate)
         {
-            if(_context is null) return context_Locations.Single(predicate);
-            return _context.Locations.Single(predicate) ;
+            Location location;
+
+            if (_context is null)
+            {
+                location = context_Locations.SingleOrDefault(predicate);
+            }
+            else
+            {
+                location = _context.Locations.SingleOrDefault(predicate);
+            }
+            if (location is null) throw new Exception("Location does not exist");
+
+            return location;
         }
     }
 }
