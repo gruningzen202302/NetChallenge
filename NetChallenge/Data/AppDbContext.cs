@@ -1,3 +1,4 @@
+using System;
 using Microsoft.EntityFrameworkCore;
 using NetChallenge.Domain;
 //using Microsoft.EntityFrameworkCore.Relational;//TODO check this error in Visual studio for Windows
@@ -7,6 +8,11 @@ namespace NetChallenge.Data{
         public AppDbContext(){}
         public AppDbContext(DbContextOptions<AppDbContext> options):base(options){
             if (Database is null) Database.Migrate();
+        }
+        private MockContext _mockContext;
+        public AppDbContext(MockContext mockContext)
+        {
+            _mockContext = mockContext;
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -47,5 +53,6 @@ namespace NetChallenge.Data{
         public DbSet<Facility> Facilities => Set<Facility>();
         public DbSet<Booking> Bookings => Set<Booking>();
         public DbSet<User> Users => Set<User>();
+
     }
 }
