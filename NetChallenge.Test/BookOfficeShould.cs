@@ -43,7 +43,7 @@ namespace NetChallenge.Test
             Service.BookOffice(request1);
             Service.BookOffice(request2);
 
-            Assert.Equal(2, BookingRepository.AsEnumerable().Count());
+            Assert.Equal(2, BookingRepository.GetAll().Count());
         }
 
         [Fact(Skip="Not implemented in TDD")]
@@ -56,7 +56,7 @@ namespace NetChallenge.Test
             Service.BookOffice(request1);
             Service.BookOffice(request2);
 
-            Assert.Equal(2, BookingRepository.AsEnumerable().Count());
+            Assert.Equal(2, BookingRepository.GetAll().Count());
         }
 
         [Fact(Skip="Not implemented in TDD")]
@@ -68,7 +68,7 @@ namespace NetChallenge.Test
             Service.BookOffice(request1);
             Service.BookOffice(request2);
 
-            Assert.Equal(2, BookingRepository.AsEnumerable().Count());
+            Assert.Equal(2, BookingRepository.GetAll().Count());
         }
 
         [Fact(Skip="Not implemented in TDD")]

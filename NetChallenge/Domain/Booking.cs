@@ -12,6 +12,6 @@ namespace NetChallenge.Domain
         public int UserId { get; set; }
         public virtual User User { get; set; }
         [Required] public DateTime DateTime { get; set; }
-        public TimeSpan Duration { get; set; }
+        [Required, PositiveTimeSpan] public TimeSpan Duration { get; set; }
     }
 }

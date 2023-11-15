@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -72,8 +73,17 @@ namespace NetChallenge
 
         public void BookOffice(BookOfficeRequest bookOfficeRequest)
         {
-            var offices = _officeRepository.GetAllDeprecated();
-            throw new NotImplementedException();
+
+            var bookings = _bookingRepository.GetAll();
+            var bookOfficeRequestDateTimeThru = bookOfficeRequest.DateTime.Add(bookOfficeRequest.Duration);
+
+            var theDatesFrom = new SortedSet<DateTime>(bookings.Select(x => x.DateTime));
+            DateTime? ceiling = theDatesFrom
+                 .GetViewBetween(bookOfficeRequestDateTimeThru, DateTime.MaxValue)
+                 .FirstOrDefault();
+
+            if (ceiling is not null) throw new Exception($"There's an event already starting before {bookOfficeRequestDateTimeThru}");
+
         }
 
         public IEnumerable<BookingDto> GetBookings(string locationName, string officeName)
