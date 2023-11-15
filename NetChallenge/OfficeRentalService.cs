@@ -75,14 +75,31 @@ namespace NetChallenge
         {
 
             var bookings = _bookingRepository.GetAll();
-            var bookOfficeRequestDateTimeThru = bookOfficeRequest.DateTime.Add(bookOfficeRequest.Duration);
+            var bookOfficeRequestDateTimeEnd = bookOfficeRequest.DateTime.Add(bookOfficeRequest.Duration);
 
-            var theDatesFrom = new SortedSet<DateTime>(bookings.Select(x => x.DateTime));
-            DateTime? ceiling = theDatesFrom
-                 .GetViewBetween(bookOfficeRequestDateTimeThru, DateTime.MaxValue)
+            var dateTimeStartItems = new SortedSet<DateTime>(bookings.Select(x => x.DateTime));
+            DateTime? officeBusySince = dateTimeStartItems
+                 .GetViewBetween(bookOfficeRequestDateTimeEnd, DateTime.MaxValue)
                  .FirstOrDefault();
+            bool conditionsForNextEventStartOverlap = 
+                officeBusySince != default
+                && officeBusySince.GetValueOrDefault()< bookOfficeRequestDateTimeEnd;
+            
+            
 
-            if (ceiling is not null) throw new Exception($"There's an event already starting before {bookOfficeRequestDateTimeThru}");
+            if (conditionsForNextEventStartOverlap) throw new Exception($"There's an event already starting before {bookOfficeRequestDateTimeEnd} . Suggested duration : {officeBusySince}");
+        //TODO persist the DateTimeEnd to avoid this calculation. The DateEnd is more frecuently used than the Duration
+            var dateTimeEndItems = new SortedSet<DateTime>(bookings.Select(x=>x.DateTime.Add(x.Duration)));
+            DateTime? officeFreeSince = dateTimeEndItems
+                .GetViewBetween(bookOfficeRequest.DateTime, DateTime.MinValue )
+                .FirstOrDefault();
+            bool conditionsForPreviusEventEndOverlap = 
+                officeFreeSince != default && officeFreeSince.GetValueOrDefault()> bookOfficeRequest.DateTime;
+            if(conditionsForPreviusEventEndOverlap) throw new Exception($"There's an eventalready ending after {bookOfficeRequest.DateTime}. Suggested starting since: {officeFreeSince}");
+            
+            //TODO this is not used, but it implies that 3 unit test must be done with failing assertions; and 3 with success assertion 
+            //bool conditionsForEventOverlap = conditionsForNextEventStartOverlap || conditionsForPreviusEventEndOverlap;
+
 
         }
 
