@@ -10,6 +10,10 @@ Offices are rented by the hour individually.
 A system is needed that manages reservations, optimizing the use of each office according to its capacity and available resources (whiteboard, projector, internet access, etc.).
 Reservations are made back-to-back, there is no need to consider any time between the end of one reservation and the start of the next.*
 
+
+![image](https://github.com/gruningzen202302/NetChallenge/assets/124462872/1d0515e4-99df-42b0-a48b-cd0a8cac01e2)
+
+
 ## Required functionality
 
 The *IOfficeRentalService* interface acts as the entry point for all operations.
