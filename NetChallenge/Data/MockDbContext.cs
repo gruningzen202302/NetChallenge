@@ -5,6 +5,7 @@ using System.Net;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using NetChallenge.Data;
+using NetChallenge.Data.Utils;
 using NetChallenge.Domain;
 
 public class MockContext : DbContext, IDbContext
@@ -26,6 +27,18 @@ public class MockContext : DbContext, IDbContext
 
     public MockContext()
     {
+
+        Office defaultOffice = new Office
+        {
+            Location = AddLocationDomainMother.Default,
+            Name = "Default Office",
+            MaxCapacity = 10,
+            Facilities = new List<Facility> { new() { Title = "Internet", } },
+        };
+        var offices = new List<Office> { };
+        Offices = offices.AsQueryable();
+
+
         var bookings = new List<Booking>();
         bookings
             .AddRange(
@@ -41,6 +54,7 @@ public class MockContext : DbContext, IDbContext
                             Name="Soho",
                             Location= new(){
                                 Name="New York",
+                                Neighborhood = "NY",
                             }
                         }
                     },
@@ -63,6 +77,7 @@ public class MockContext : DbContext, IDbContext
                             Name="Soho",
                             Location= new(){
                                 Name="New York",
+                                Neighborhood="NY"
                             }
                         },
                     }
@@ -70,8 +85,6 @@ public class MockContext : DbContext, IDbContext
 
         Bookings = bookings.AsQueryable();
 
-        var offices = new List<Office> { };
-        Offices = offices.AsQueryable();
 
         var locations = new List<Location>();
         Locations = locations.AsQueryable();
@@ -94,6 +107,7 @@ public class MockContext : DbContext, IDbContext
                 Email="monica123@gmail.com"
             },
         }.AsQueryable();
+
     }
 }
 

@@ -40,9 +40,10 @@ namespace NetChallenge
         }
         public void AddLocation(AddLocationRequest request)
         {
-                Location location = new Location();
-                location.Neighborhood = request.Neighborhood;
-                location.Name = request.Name;
+                Location location = new Location(){
+                    Neighborhood = request.Neighborhood,
+                    Name = request.Name,
+                };
 
                 _locationRepository.Add(location);
                 
@@ -66,7 +67,7 @@ namespace NetChallenge
             List<Facility> facilitiesList = new();
             foreach (var officeRequestFacility in officeRequestFacilities)
             {
-                Facility facility = new() { Name = officeRequestFacility };
+                Facility facility = new() { Title = officeRequestFacility };
                 facilitiesList.Add(facility);
             }
             return facilitiesList;

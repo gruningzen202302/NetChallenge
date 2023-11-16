@@ -12,18 +12,10 @@ namespace NetChallenge.Infrastructure
     public class LocationRepository : ILocationRepository
     {
 
-        private List<Location> _context_Locations = new(){
-            new(){
-                Name="New York",
-            },
-            new(){
-                Name="Mexico DF",
-            }
-        };
         private readonly IDbContext _context;
         public LocationRepository()
         {
-            //context_Locations = new List<Location>();
+            _context = new MockContext();
         }
         public LocationRepository(IDbContext context)
         {
@@ -36,49 +28,16 @@ namespace NetChallenge.Infrastructure
 
         public void Add(Location location)
         {
-            if (_context is null) { _context_Locations.Add(location); return; }
-
             _context.Locations.ToHashSet<Location>().Add(location);
         }
 
         public IEnumerable<Location> GetAllDeprecated()
         {
-
-            if (_context is null) return _context_Locations.ToList();
-
-            return _context.Locations.ToList();
-
+            throw new NotSupportedException($"This method is deprecated");
         }
 
-        public Location GetOne(Func<Location, bool> predicate)
-        {
-            Location location;
+        public Location GetOne(Func<Location, bool> predicate) => _context.Locations.FirstOrDefault(predicate);
 
-            if (_context is null)
-            {
-                location = _context_Locations.FirstOrDefault(predicate);
-            }
-            else
-            {
-                location = _context.Locations.FirstOrDefault(predicate);
-            }
-            if (location is null) throw new Exception("Location does not exist");
-
-            return location;
-        }
-
-        public IEnumerable<Location> GetMany(Func<Location, bool> predicate)
-        {
-            IEnumerable<Location> locations = Enumerable.Empty<Location>();
-            if (_context is null)
-            {
-                locations = _context_Locations.Where(predicate);
-            }
-            else
-            {
-                locations = _context.Locations.Where(predicate);
-            }
-            return locations;
-        }
+        public IEnumerable<Location> GetMany(Func<Location, bool> predicate) => _context.Locations.Where(predicate);
     }
 }

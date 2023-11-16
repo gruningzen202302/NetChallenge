@@ -11,20 +11,6 @@ namespace NetChallenge.Infrastructure
 {
     public class OfficeRepository : IOfficeRepository
     {
-        private List<Office> _context_Offices = new(){
-            new(){
-                Name="Soho",
-                Location= new(){
-                    Name="New York",
-                }
-            },
-            new(){
-                Name="Manhattan",
-                Location= new(){
-                    Name="New York",
-                }
-            }
-        };
         private readonly IDbContext _context;
         public OfficeRepository()
         {
@@ -49,31 +35,13 @@ namespace NetChallenge.Infrastructure
         }
 
         Office IRepository<Office>.GetOne(Func<Office, bool> predicate)
-        {
-            Office office = null;
-            //TODO replace with FirstOrDefault if the custom Exception implemented handles result >1 
-            if (_context is null)
-            {
-                office = _context_Offices.FirstOrDefault(predicate);
-
-            }
-            else
-            {
-                office = _context.Offices.FirstOrDefault(predicate);
-            }
-            if (office is null) throw new Exception("This office does not exist");
+        { 
+            var ls = _context.Offices.ToList();
+            var office = _context.Offices.FirstOrDefault(predicate);
+            
             return office;
         }
 
-        public IEnumerable<Office> GetMany(Func<Office, bool> predicate)
-        {
-            IEnumerable<Office> offices= Enumerable.Empty<Office>();
-            if(_context is null){
-                offices = _context_Offices.Where(predicate);
-            } else {
-                offices = _context.Offices.Where(predicate);
-            }
-            return offices;
-        }
+        public IEnumerable<Office> GetMany(Func<Office, bool> predicate)=> _context.Offices.Where(predicate);
     }
 }

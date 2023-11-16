@@ -24,7 +24,7 @@ builder.Services.AddCors(options=>{
 
 builder.Services
     .AddAutoMapper(typeof(BookingProfile))
-    .AddSingleton<ILocationRepository,ILocationRepository>()
+    .AddSingleton<ILocationRepository,LocationRepository>()
     .AddEndpointsApiExplorer()
     .AddSwaggerGen();
 
