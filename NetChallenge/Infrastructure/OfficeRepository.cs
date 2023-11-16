@@ -42,6 +42,6 @@ namespace NetChallenge.Infrastructure
             return office;
         }
 
-        public IEnumerable<Office> GetMany(Func<Office, bool> predicate)=> _context.Offices.Where(predicate);
+        public IEnumerable<Office> GetMany(Func<Office, bool> predicate) => _context.Offices.ToList().Where(predicate);
     }
 }
