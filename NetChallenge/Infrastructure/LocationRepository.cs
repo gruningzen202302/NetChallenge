@@ -20,14 +20,14 @@ namespace NetChallenge.Infrastructure
                 Name="Mexico DF",
             }
         };
-        private readonly AppDbContext _context;
+        private readonly IDbContext _context;
         public LocationRepository()
         {
             //context_Locations = new List<Location>();
         }
-        public LocationRepository(AppDbContext context)
+        public LocationRepository(IDbContext context)
         {
-            this._context = context;
+            _context = context;
         }
         public IEnumerable<Location> GetAll()
         {
@@ -38,7 +38,7 @@ namespace NetChallenge.Infrastructure
         {
             if (_context is null) { _context_Locations.Add(location); return; }
 
-            _context.Locations.Add(location);
+            _context.Locations.ToHashSet<Location>().Add(location);
         }
 
         public IEnumerable<Location> GetAllDeprecated()

@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using NetChallenge.Data;
 using NetChallenge.Domain;
 using AutoMapper;
+using NetChallenge.Abstractions;
+using NetChallenge.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +24,7 @@ builder.Services.AddCors(options=>{
 
 builder.Services
     .AddAutoMapper(typeof(BookingProfile))
+    .AddSingleton<ILocationRepository,ILocationRepository>()
     .AddEndpointsApiExplorer()
     .AddSwaggerGen();
 
@@ -47,7 +50,8 @@ app.UseSwaggerUI();
 
 app.MapPost("api/locations", async (AppDbContext context, Location location) =>
 {
-    await context.Locations.AddAsync(location);
+    //await context.Locations.AddAsync(location);
+    new LocationRepository(context).Add(location);
     await context.SaveChangesAsync();
     return Results.Created($"api/locations/{location.Id}", location);
 })

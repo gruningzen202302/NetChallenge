@@ -16,23 +16,14 @@ namespace NetChallenge.Infrastructure;
 public class BookingRepository : IBookingRepository
 {
     //private readonly DbContext _context;
-    private readonly AppDbContext _context;
+    private readonly IDbContext _context;
     public BookingRepository()
     {
-        try
-        {
-            //_context = new MockContext();
-
-        }
-        catch (SqliteException)
-        {
-
-            //throw;
-        }
+        _context = new MockContext();
     }
-    public BookingRepository(DbContext context)
+    public BookingRepository(IDbContext context)
     {
-        _context = (AppDbContext)context;
+        _context = context;
     }
 
     public IEnumerable<Booking> GetAll()
@@ -47,7 +38,7 @@ public class BookingRepository : IBookingRepository
     {
         bool userValidationSuccedded = this.ValidateUser(booking);
         if(!userValidationSuccedded) throw new Exception("There was a problem with the user");
-        _context.Bookings.Add(booking); 
+        _context.Bookings.ToList().Add(booking); 
         
     }
 

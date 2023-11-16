@@ -25,9 +25,9 @@ namespace NetChallenge.Infrastructure
                 }
             }
         };
-        private readonly AppDbContext _context;
+        private readonly IDbContext _context;
 
-        public OfficeRepository(AppDbContext context = null)
+        public OfficeRepository(IDbContext context )
         {
             _context = context;
         }
@@ -35,12 +35,7 @@ namespace NetChallenge.Infrastructure
 
         public void Add(Office office)
         {
-
-            if (_context is null)
-            {
-                _context_Offices.Add(office); return;
-            }
-            _context.Offices.Add(office);
+            _context.Offices.ToHashSet<Office>().Add(office);
         }
 
         public IEnumerable<Office> GetAllDeprecated() => new List<Office>();

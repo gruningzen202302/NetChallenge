@@ -6,10 +6,14 @@ using Microsoft.EntityFrameworkCore;
 using NetChallenge.Data;
 using NetChallenge.Domain;
 
-public class MockContext : DbContext//AppDbContext
+public class MockContext : DbContext, IDbContext
 {
     private static MockContext _singletonMockContextInstance;
     private List<Booking> _bookings = new();
+    private List<Facility> _facilities = new();
+    private List<Location> _locations = new();
+    private List<Office> _offices = new();
+    private List<User> _users = new();
     public static MockContext SingletonMockContextInstance
     {
         get
@@ -19,6 +23,11 @@ public class MockContext : DbContext//AppDbContext
         }
     }
     public IQueryable<Booking> Bookings => _bookings.AsQueryable();
+    public IQueryable<Facility> Facilities => _facilities.AsQueryable();
+    public IQueryable<Location> Locations => _locations.AsQueryable();
+    public IQueryable<Office> Offices => _offices.AsQueryable();
+    public IQueryable<User> Users => _users.AsQueryable();
+
     public MockContext()
     {
 
@@ -66,19 +75,3 @@ public class MockContext : DbContext//AppDbContext
     }
 }
 
-
-// public DbSet<Location> Locations => Set<Location>();
-// public DbSet<Office> Offices =>Set<Office>();
-// public DbSet<Facility> Facilities => Set<Facility>();
-// public DbSet<Booking> Bookings => Set<Booking>();
-// public DbSet<User> Users => Set<User>();
-
-//}
-
-// public class MockContextExceptionHandler : ISqlExceptionHandler
-// {
-//     public void OnException(SqliteException exception)
-//     {
-//         Console.WriteLine($" MockContext Exception: {exception.Message}");
-//     }
-// }
