@@ -9,11 +9,6 @@ using NetChallenge.Domain;
 public class MockContext : DbContext, IDbContext
 {
     private static MockContext _singletonMockContextInstance;
-    private List<Booking> _bookings = new();
-    private List<Facility> _facilities = new();
-    private List<Location> _locations = new();
-    private List<Office> _offices = new();
-    private List<User> _users = new();
     public static MockContext SingletonMockContextInstance
     {
         get
@@ -22,17 +17,16 @@ public class MockContext : DbContext, IDbContext
             return _singletonMockContextInstance;
         }
     }
-    public IQueryable<Booking> Bookings => _bookings.AsQueryable();
-    public IQueryable<Facility> Facilities => _facilities.AsQueryable();
-    public IQueryable<Location> Locations => _locations.AsQueryable();
-    public IQueryable<Office> Offices => _offices.AsQueryable();
-    public IQueryable<User> Users => _users.AsQueryable();
+    public IQueryable<Booking> Bookings { get; set; }
+    public IQueryable<Facility> Facilities { get; set; }
+    public IQueryable<Location> Locations { get; set; }
+    public IQueryable<Office> Offices { get; set; }
+    public IQueryable<User> Users { get; set; }
 
     public MockContext()
     {
-
-        Bookings
-            .ToList()
+        var bookings = new List<Booking>();
+        bookings
             .AddRange(
                 new List<Booking>(){
                     new(){
@@ -72,6 +66,16 @@ public class MockContext : DbContext, IDbContext
                         },
                     }
             });
+
+        Bookings = bookings.AsQueryable();
+
+        var offices = new List<Office> { };
+        Offices = offices.AsQueryable();
+
+        var locations = new List<Location>();
+        Locations = locations.AsQueryable();
+
+
     }
 }
 

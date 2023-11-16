@@ -48,14 +48,14 @@ namespace NetChallenge.Data{
         }
         protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseSqlite();
 
-        IQueryable<Booking> IDbContext.Bookings => Set<Booking>();
+        IQueryable<Booking> IDbContext.Bookings { get; set; }
 
-        IQueryable<Facility> IDbContext.Facilities => Set<Facility>();
+        IQueryable<Facility> IDbContext.Facilities { get; set; }
 
-        IQueryable<Location> IDbContext.Locations => Set<Location>();
+        IQueryable<Location> IDbContext.Locations { get; set; }
 
-        IQueryable<Office> IDbContext.Offices => Set<Office>();
+        IQueryable<Office> IDbContext.Offices { get; set; }
 
-        IQueryable<User> IDbContext.Users => Set<User>();
+        IQueryable<User> IDbContext.Users { get; set; }
     }
 }

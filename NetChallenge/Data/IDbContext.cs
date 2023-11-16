@@ -6,16 +6,10 @@ namespace NetChallenge.Data
 {
     public interface IDbContext
     {
-        //DbSet<Booking> Bookings { get; }
-        //DbSet<Facility> Facilities { get; }
-        //DbSet<Location> Locations { get; }
-        //DbSet<Office> Offices { get; }
-        //DbSet<User> Users { get; }
-
-        IQueryable<Booking> Bookings { get; }
-        IQueryable<Facility> Facilities { get; }
-        IQueryable<Location> Locations { get; }
-        IQueryable<Office> Offices { get; }
-        IQueryable<User> Users { get; }
+        IQueryable<Booking> Bookings { get; set; }
+        IQueryable<Facility> Facilities { get; set;}
+        IQueryable<Location> Locations { get; set;}
+        IQueryable<Office> Offices { get; set;}
+        IQueryable<User> Users { get; set;}
     }
 }

@@ -26,7 +26,10 @@ namespace NetChallenge.Infrastructure
             }
         };
         private readonly IDbContext _context;
-
+        public OfficeRepository()
+        {
+            _context = new MockContext();
+        }
         public OfficeRepository(IDbContext context )
         {
             _context = context;
@@ -35,7 +38,7 @@ namespace NetChallenge.Infrastructure
 
         public void Add(Office office)
         {
-            _context.Offices.ToHashSet<Office>().Add(office);
+            _context.Offices.ToList().Add(office);
         }
 
         public IEnumerable<Office> GetAllDeprecated() => new List<Office>();
