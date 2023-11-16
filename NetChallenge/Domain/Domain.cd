@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NetChallenge.Domain.Booking">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <AssociationLine Name="User" Type="NetChallenge.Domain.User" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="2" Y="1.938" />
+        <Point X="3.25" Y="1.938" />
+        <Point X="3.25" Y="3.25" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAJAAAAAAACAAAAAAAAIAgAAAAAAAQAAAAAAAQAAAA=</HashCode>
+      <FileName>Domain\Booking.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Office" />
+      <Property Name="User" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="NetChallenge.Domain.Office">
+    <Position X="5.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAgAAAAAAIAAAQAAAAAQAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Domain\Office.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Location" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="NetChallenge.Domain.User">
+    <Position X="2.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NetChallenge.Domain.Facility">
+    <Position X="4.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAIAQAAAAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>Domain\Facility.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Office" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="NetChallenge.Domain.Location">
+    <Position X="6.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQIAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Domain\Location.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
