@@ -43,7 +43,7 @@ namespace NetChallenge.Data{
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<User>()
-                .Property(u => u.Email)
+                .Property(u => u.Name)
                 .IsRequired();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseSqlite();

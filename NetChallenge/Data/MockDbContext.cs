@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using NetChallenge.Data;
@@ -75,7 +76,24 @@ public class MockContext : DbContext, IDbContext
         var locations = new List<Location>();
         Locations = locations.AsQueryable();
 
-
+        Users = new List<User>{
+            new(){
+                Name="test_user",
+                Email="test@gmail.com"
+            },
+            new(){
+                Name="John Doe",
+                Email="john001@gmail.com"
+            },
+            new(){
+                Name="Larry Page",
+                Email="larry@gamil.com"
+            },
+            new(){
+                Name="Monica Smith",
+                Email="monica123@gmail.com"
+            },
+        }.AsQueryable();
     }
 }
 

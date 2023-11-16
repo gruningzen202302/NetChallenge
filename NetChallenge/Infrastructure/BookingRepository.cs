@@ -28,29 +28,14 @@ public class BookingRepository : IBookingRepository
 
     public IEnumerable<Booking> GetAll()
     {
-        //var bookings = _context.Set<Booking>().AsEnumerable();
         var bookings = _context.Bookings.AsEnumerable();
-        var ls = bookings.ToList();
         return bookings;
     }
 
     public void Add(Booking booking)
     {
-        bool userValidationSuccedded = this.ValidateUser(booking);
-        if(!userValidationSuccedded) throw new Exception("There was a problem with the user");
         _context.Bookings.ToList().Add(booking); 
-        
-    }
-
-    private bool ValidateUser(Booking booking)
-    {
-        throw new NotImplementedException();
-    }
-    private bool ValidateOffice(Office office){
-        if(office is null) return false;
-        //bool 
-        //if()
-        return true;
+        var ls = _context.Bookings.ToList();
     }
 
     public IEnumerable<Booking> GetAllDeprecated() => throw new NotImplementedException();
@@ -60,7 +45,7 @@ public class BookingRepository : IBookingRepository
         return _context.Bookings.Single(predicate) ;
     }
 
-    public IEnumerable<Booking> GetSome(Func<Booking, bool> predicate)
+    public IEnumerable<Booking> GetMany(Func<Booking, bool> predicate)
     {
         IEnumerable<Booking> bookings = Enumerable.Empty<Booking>();
         bookings = _context.Bookings.Where(predicate);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using NetChallenge.Abstractions;
@@ -73,6 +74,22 @@ namespace NetChallenge
 
         public void BookOffice(BookOfficeRequest bookOfficeRequest)
         {
+            ValidateBookingOfficeWhenAnotherOneIsBooked(bookOfficeRequest);
+
+            var user = new UserRepository().GetOne(x => x.Name.Trim().Equals(bookOfficeRequest.UserName.Trim()));
+            var office = _officeRepository.GetOne(x => x.Name.Trim().Equals(bookOfficeRequest.OfficeName.Trim()));
+
+            _bookingRepository.Add(new()
+            {
+                DateTime = bookOfficeRequest.DateTime,
+                Duration = bookOfficeRequest.Duration,
+                User = user,
+
+            });
+        }
+
+        private void ValidateBookingOfficeWhenAnotherOneIsBooked(BookOfficeRequest bookOfficeRequest)
+        {
             //TODO add a repo method to get just the dates
             var bookings = _bookingRepository.GetAll();
             var bookOfficeRequestDateTimeEnd = bookOfficeRequest.DateTime.Add(bookOfficeRequest.Duration);
@@ -81,7 +98,7 @@ namespace NetChallenge
             DateTime officeBusySince = dateTimeStartItems
                 .GetViewBetween(bookOfficeRequestDateTimeEnd, DateTime.MaxValue)
                 .FirstOrDefault();
-            bool conditionsForNextEventStartOverlap = 
+            bool conditionsForNextEventStartOverlap =
                 officeBusySince != default
                 && officeBusySince < bookOfficeRequestDateTimeEnd;
 
@@ -89,18 +106,16 @@ namespace NetChallenge
 
             if (conditionsForNextEventStartOverlap) throw new Exception($"There's an event already starting before {bookOfficeRequestDateTimeEnd} . Suggested duration : {suggestedDuration}");
             //TODO persist the DateTimeEnd to avoid this calculation. The DateEnd is more frecuently used than the Duration
-            var dateTimeEndItems = new SortedSet<DateTime>(bookings.Select(x=>x.DateTime.Add(x.Duration)));
-            //DateTime officeFreeSince = dateTimeEndItems
-            //  .GetViewBetween(bookOfficeRequest.DateTime, DateTime.MinValue )
-            //  .FirstOrDefault();
-            //bool conditionsForPreviusEventEndOverlap = 
-            //  officeFreeSince != default && officeFreeSince> bookOfficeRequest.DateTime;
-            //if(conditionsForPreviusEventEndOverlap) throw new Exception($"There's an eventalready ending after {bookOfficeRequest.DateTime}. Suggested starting since: {officeFreeSince}");
+            var dateTimeEndItems = new SortedSet<DateTime>(bookings.Select(x => x.DateTime.Add(x.Duration)));
+            DateTime officeFreeSince = dateTimeEndItems
+              .GetViewBetween(DateTime.MinValue, bookOfficeRequest.DateTime)
+              .FirstOrDefault();
+            bool conditionsForPreviusEventEndOverlap =
+              officeFreeSince != default && officeFreeSince > bookOfficeRequest.DateTime;
+            if (conditionsForPreviusEventEndOverlap) throw new Exception($"There's an eventalready ending after {bookOfficeRequest.DateTime}. Suggested starting since: {officeFreeSince}");
 
             //TODO this is not used, but it implies that 3 unit test must be done with failing assertions; and 3 with success assertion 
             //bool conditionsForEventOverlap = conditionsForNextEventStartOverlap || conditionsForPreviusEventEndOverlap;//TODO delete after adding tests
-
-
         }
 
         public IEnumerable<BookingDto> GetBookings(string locationName, string officeName)

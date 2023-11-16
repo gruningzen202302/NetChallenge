@@ -67,7 +67,7 @@ namespace NetChallenge.Infrastructure
             return location;
         }
 
-        public IEnumerable<Location> GetSome(Func<Location, bool> predicate)
+        public IEnumerable<Location> GetMany(Func<Location, bool> predicate)
         {
             IEnumerable<Location> locations = Enumerable.Empty<Location>();
             if (_context is null)

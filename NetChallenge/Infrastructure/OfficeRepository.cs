@@ -65,7 +65,7 @@ namespace NetChallenge.Infrastructure
             return office;
         }
 
-        public IEnumerable<Office> GetSome(Func<Office, bool> predicate)
+        public IEnumerable<Office> GetMany(Func<Office, bool> predicate)
         {
             IEnumerable<Office> offices= Enumerable.Empty<Office>();
             if(_context is null){
