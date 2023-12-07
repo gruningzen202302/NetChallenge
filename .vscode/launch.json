@@ -26,6 +26,19 @@
       "sourceFileMap": {
         "/Views": "${workspaceRoot}/NetChallenge/Views"
       }
+    },
+    {
+      "name": "Run .NET Core Test",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "dotnet: build", // or "dotnet: build" if you have a dotnet build task
+      "program": "${workspaceFolder}/NetChallenge.Test/bin/Debug/net7.0/NetChallenge.Test.dll", // replace with your test project's dll
+      "args": ["--filter", "FullyQualifiedName~Namespace.ClassName.MethodName"], // replace with your test's fully qualified name
+      "cwd": "${workspaceFolder}/NetChallenge.Test", // replace with your test project's path
+      "console": "integratedTerminal",
+      "stopAtEntry": false,
+      // Remove the "debug.allowBreakpointsEverywhere" property
+      "csharp.debug.allowBreakpointsEverywhere": true,
     }
   ]
 }
